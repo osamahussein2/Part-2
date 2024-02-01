@@ -30,6 +30,8 @@ public class Plane : MonoBehaviour
 
     private void FixedUpdate()
     {
+        speed = Random.Range(1, 4);
+
         currentPosition = transform.position;
 
         if(points.Count > 0)
