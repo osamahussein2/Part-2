@@ -126,6 +126,12 @@ public class Plane : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(collision.gameObject.name == "Runway")
+        {
+            float interpolation = landing.Evaluate(timerValue);
+            transform.position = Vector3.Lerp((Vector2)transform.position, (Vector2)rigidbody.position, interpolation);
+        }
         
     }
 
