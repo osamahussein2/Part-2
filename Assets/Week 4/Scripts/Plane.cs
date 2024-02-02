@@ -18,6 +18,9 @@ public class Plane : MonoBehaviour
     public AnimationCurve landing;
     float timerValue;
 
+    SpriteRenderer spriteRenderer;
+    public GameObject circle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,9 @@ public class Plane : MonoBehaviour
         lineRenderer.SetPosition(0, transform.position);
 
         rigidbody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        circle.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -34,7 +40,7 @@ public class Plane : MonoBehaviour
 
         currentPosition = transform.position;
 
-        if(points.Count > 0)
+        if (points.Count > 0)
         {
             Vector2 direction = points[0] - currentPosition;
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
@@ -46,12 +52,12 @@ public class Plane : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             timerValue += 0.5f * Time.deltaTime;
             float interpolation = landing.Evaluate(timerValue);
 
-            if(transform.localScale.z < 0.1f)
+            if (transform.localScale.z < 0.1f)
             {
                 Destroy(gameObject);
             }
@@ -63,17 +69,23 @@ public class Plane : MonoBehaviour
 
         if (points.Count > 0)
         {
-            if(Vector2.Distance(currentPosition, points[0]) < pointThreshold)
+            if (Vector2.Distance(currentPosition, points[0]) < pointThreshold)
             {
                 points.RemoveAt(0);
 
-                for(int i = 0; i < lineRenderer.positionCount - 2; i++)
+                for (int i = 0; i < lineRenderer.positionCount - 2; i++)
                 {
                     lineRenderer.SetPosition(i, lineRenderer.GetPosition(i + 1));
                 }
 
                 lineRenderer.positionCount--;
             }
+        }
+
+        if (gameObject.transform.position.x > 9.5f || gameObject.transform.position.y > 5.0f ||
+            gameObject.transform.position.x < -9.5f || gameObject.transform.position.y < -5.0f)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -88,12 +100,42 @@ public class Plane : MonoBehaviour
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if(Vector2.Distance(lastPosition, mousePos) > pointThreshold)
+        if (Vector2.Distance(lastPosition, mousePos) > pointThreshold)
         {
             points.Add(mousePos);
             lineRenderer.positionCount++;
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, mousePos);
             lastPosition = mousePos;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.red;
+        
+        if (!circle.activeInHierarchy)
+        {
+            circle.SetActive(true);
+        }
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Vector3.Distance(lastPosition, rigidbody.position) < pointThreshold)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.white;
+
+        if (circle.activeInHierarchy)
+        {
+            circle.SetActive(false);
         }
     }
 }

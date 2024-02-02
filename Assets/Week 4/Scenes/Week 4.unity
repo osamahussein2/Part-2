@@ -250,7 +250,6 @@ MonoBehaviour:
   - {fileID: 3302905279048846418, guid: 3d2e761dcdf75e64186a7a50d483d9ce, type: 3}
   - {fileID: 4759549020182383486, guid: fd37ae062cef9474981b45b3b7cfac56, type: 3}
   - {fileID: 3575505822919405068, guid: 24ebafb93fcef0346b2987be9e47a98e, type: 3}
-  planeIndex: 0
 --- !u!4 &810211556
 Transform:
   m_ObjectHideFlags: 0
