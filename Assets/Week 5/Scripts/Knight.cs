@@ -12,6 +12,8 @@ public class Knight : MonoBehaviour
 
     Animator animator;
 
+    bool clickingOnSelf = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +36,22 @@ public class Knight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !clickingOnSelf)
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
         animator.SetFloat("Movement", movement.magnitude);
+    }
+
+    private void OnMouseDown()
+    {
+        clickingOnSelf = true;
+        animator.SetTrigger("TakeDamage");
+    }
+
+    private void OnMouseUp()
+    {
+        clickingOnSelf = false;
     }
 }
