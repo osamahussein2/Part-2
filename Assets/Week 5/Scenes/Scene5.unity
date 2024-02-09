@@ -1759,6 +1759,7 @@ MonoBehaviour:
   speed: 3
   health: 0
   maxHealth: 5
+  axeWeapon: {fileID: 4498827590996227122, guid: 06486851394295f4f89efdd5111a3913, type: 3}
 --- !u!95 &8782083644529023878
 Animator:
   serializedVersion: 5

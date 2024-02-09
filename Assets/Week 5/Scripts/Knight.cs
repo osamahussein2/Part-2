@@ -17,6 +17,10 @@ public class Knight : MonoBehaviour
 
     bool clickingOnSelf = false;
 
+    public GameObject axeWeapon;
+
+    float timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,15 @@ public class Knight : MonoBehaviour
         }
 
         animator.SetFloat("Movement", movement.magnitude);
+
+        timer += Time.deltaTime;
+
+        if(timer > 3)
+        {
+            Instantiate(axeWeapon, transform.position, Quaternion.identity);
+
+            timer = Random.Range(1, 3);
+        }
     }
 
     private void OnMouseDown()
