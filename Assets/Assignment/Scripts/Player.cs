@@ -19,6 +19,17 @@ public class Player : MonoBehaviour
 
     float speed = 1;
 
+    public GameObject diamond; // I'll use diamond object inside the inspector so that it can be spawned
+    float diamondTimer; // Spawn the diamond by using the diamond timer
+
+    public GameObject coal; // I'll use coal object inside the inspector so that it can be spawned
+    float coalTimer; // Spawn the coal by using the coal timer
+
+    public int score; // Show the score inside the inspector to prove that it's working with the score UI
+
+    public float health; // Show player's health inside the inspector to prove it's woring with the health bar UI
+    private float maxHealth = 3; // Make this private so that this variable can't be modified in the inspector
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +39,10 @@ public class Player : MonoBehaviour
         lineRenderer.SetPosition(0, transform.position); // Set its position to transform's position at the start
 
         rigidbody = GetComponent<Rigidbody2D>();
+
+        score = 0; // Make it 0 at the start because the player hasn't collected the diamonds yet
+
+        health = maxHealth; // Make health equal to full health at the start
     }
 
     // Update is called once per frame
@@ -76,6 +91,24 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, 3.8f);
         }
+
+        // Increment the diamond timer by deltaTime and spawn it after 3 seconds, then randomize the diamond timer
+        diamondTimer += Time.deltaTime;
+
+        if (diamondTimer > 3)
+        {
+            Instantiate(diamond, transform.position, Quaternion.identity);
+            diamondTimer = Random.Range(1, 3);
+        }
+
+        // Increment the coal timer by deltaTime and spawn it after 8 seconds, then randomize the coal timer
+        coalTimer += Time.deltaTime;
+
+        if (coalTimer > 8)
+        {
+            Instantiate(coal, transform.position, Quaternion.identity);
+            coalTimer = Random.Range(4, 8);
+        }
     }
 
     private void FixedUpdate()
@@ -117,6 +150,33 @@ public class Player : MonoBehaviour
             lineRenderer.positionCount++;
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, newPosition);
             lastPosition = newPosition;
+        }
+    }
+
+    public void IncreaseScore()
+    {
+        // Only increase the score if the player health is greather than 0
+        if (health > 0)
+        {
+            score++;
+        }
+
+        // Don't increase the score if the player health is at 0 and if the score is equal to 0 or greater than 0
+        if (health <= 0 && score >= 0)
+        {
+            score += 0;
+        }
+    }
+
+    public void LowerHealth()
+    {
+        // Decrement player health
+        health--;
+
+        // If the player health is at 0, make it equal to 0 so that it doesn't decrement to a negative number
+        if (health <= 0)
+        {
+            health = 0;
         }
     }
 }
