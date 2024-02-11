@@ -43,6 +43,13 @@ public class Player : MonoBehaviour
         score = 0; // Make it 0 at the start because the player hasn't collected the diamonds yet
 
         health = maxHealth; // Make health equal to full health at the start
+
+        /* Write to the console what the player needs to do to not be stuck when moving their player away
+        from the screen boundaries */
+        Debug.Log("When the player gets stuck when trying to go offscreen, the player needs to put their" +
+            " mouse on the sprite's bottom tie and draw a line away from the screen boundaries because of the" +
+            " way of the sprite's pivot point is set up to be at the bottom center instead of center (so that" +
+            " the star trails render below the player rather than where the player's center is)");
     }
 
     // Update is called once per frame
