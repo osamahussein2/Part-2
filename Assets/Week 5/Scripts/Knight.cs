@@ -17,6 +17,8 @@ public class Knight : MonoBehaviour
 
     bool clickingOnSelf = false;
 
+    bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class Knight : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         movement = destination - (Vector2)transform.position;
 
         if(movement.magnitude < 0.1)
@@ -41,7 +45,9 @@ public class Knight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && !clickingOnSelf)
+        if (isDead) return;
+
+        if (Input.GetMouseButtonDown(0) && !clickingOnSelf)
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -56,6 +62,8 @@ public class Knight : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (isDead) return;
+
         clickingOnSelf = true;
         SendMessage("TakeDamage", 1);
     }
@@ -72,10 +80,12 @@ public class Knight : MonoBehaviour
 
         if(health == 0)
         {
+            isDead = true;
             animator.SetTrigger("Death");
         }
         else
         {
+            isDead = false;
             animator.SetTrigger("TakeDamage");
         }
     }
