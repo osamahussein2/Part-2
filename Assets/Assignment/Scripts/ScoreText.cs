@@ -6,10 +6,10 @@ using UnityEngine;
 public class ScoreText : MonoBehaviour
 {
     public TextMeshProUGUI scoreText; // I'll use the TextMeshPro component to display the score
-    int score; // This will show the score on the UI
+    private int score; // This will show the score on the UI
 
-    public float health; // This is needed so that I can put this variable inside the if statement
-    private float maxHealth = 3; // This is only here so that I can initialize this to equal to the player's health
+    private int health; // This is needed so that I can put this variable inside the if statement
+    private int maxHealth = 3; // This is only here so that I can initialize this to equal to the player's health
 
 
     // Start is called before the first frame update

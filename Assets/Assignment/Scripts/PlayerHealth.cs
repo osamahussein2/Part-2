@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public Image[] fullHealth; // I'll use a full health bar image inside the inspector
     public Image[] noHealth; // I'll use a no health bar image inside the inspector
 
-    public int health; // Show player's health inside the inspector to prove it's woring with the health bar UI
+    private int health; // Show player's health inside the inspector to prove it's woring with the health bar UI
     private int maxHealth = 3; // Make this private so that this variable can't be modified in the inspector
 
     // Start is called before the first frame update

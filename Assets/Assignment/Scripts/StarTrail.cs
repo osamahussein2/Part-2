@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StarTrail : MonoBehaviour
@@ -30,10 +31,6 @@ public class StarTrail : MonoBehaviour
 
             // Set the trail timer equal to start trail timer immediately to count this down using deltaTime
             trailTimer = startTrailTimer;
-
-            // Destroy the star badge prefab every 1.4 seconds so that the prefab doesn't stay in the game forever
-            // I tried putting it inside the else if statement below but it rendered too many stars at one time
-            Destroy(Instantiate(starBadge, transform.position, transform.rotation), 1.4f);
         }
         
         /* Or if the trail timer is greater than 0, then decrement it using deltaTime so that the trails

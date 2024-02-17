@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -25,10 +26,10 @@ public class Player : MonoBehaviour
     public GameObject coal; // I'll use coal object inside the inspector so that it can be spawned
     float coalTimer; // Spawn the coal by using the coal timer
 
-    public int score; // Show the score inside the inspector to prove that it's working with the score UI
+    private int score; // Show the score inside the inspector to prove that it's working with the score UI
 
-    public float health; // Show player's health inside the inspector to prove it's woring with the health bar UI
-    private float maxHealth = 3; // Make this private so that this variable can't be modified in the inspector
+    private int health; // Show player's health inside the inspector to prove it's woring with the health bar UI
+    private int maxHealth = 3; // Make this private so that this variable can't be modified in the inspector
 
     // Start is called before the first frame update
     void Start()
@@ -184,6 +185,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
