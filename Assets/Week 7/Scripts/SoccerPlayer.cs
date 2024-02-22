@@ -11,10 +11,15 @@ public class SoccerPlayer : MonoBehaviour
     public Color selectedColor;
     public Color unselectedColor;
 
+    Rigidbody2D rigidbody;
+
+    public float speed = 500;
+
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigidbody = GetComponent<Rigidbody2D>();
         Selected(false);
     }
 
@@ -34,5 +39,10 @@ public class SoccerPlayer : MonoBehaviour
         {
             spriteRenderer.color = unselectedColor;
         }
+    }
+
+    public void Move(Vector2 direction)
+    {
+        rigidbody.AddForce(direction * speed);
     }
 }
