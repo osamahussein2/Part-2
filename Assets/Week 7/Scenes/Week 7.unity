@@ -3905,6 +3905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 211600460}
+  goalkeeper: {fileID: 1360638715}
 --- !u!1 &1079000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -4185,6 +4186,11 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1360638715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2966612587756515618, guid: af9f9d9ae0674ea47b29116f8cc4a06b, type: 3}
+  m_PrefabInstance: {fileID: 1282957747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1402839229
 PrefabInstance:
   m_ObjectHideFlags: 0

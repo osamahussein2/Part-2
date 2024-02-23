@@ -34,14 +34,10 @@ public class GoalkeeperController : MonoBehaviour
         Vector2 direction = magnitude * ((Vector2)transform.position +
             (Vector2)SelectedPlayer.transform.position).normalized;
 
-        // Make the rigidbody position equal to the direction vector
-        rigidbody.position = direction;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        //rigidbody.position = ((Vector2)goalkeeper.transform.position -
-        //(Vector2)SelectedPlayer.transform.position).normalized * 0.5f;
+        /* Make the rigidbody position equal to the move towards from its rigidbody to the currently selected player
+        and make the speed float equal to 2 multipled by deltaTime to move the rigidbody toward the
+        currently selected player at the same speed */
+        rigidbody.position = Vector3.MoveTowards(rigidbody.position,
+            SelectedPlayer.transform.position, 2.0f * Time.deltaTime);
     }
 }
